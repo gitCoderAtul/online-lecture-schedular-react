@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+ 
+### Formik
+```
+const AddInstructorSchema = Yup.object({
+    instructorName: Yup.string()
+    .min(2, 'Too Short!')
+    .max(15, 'Too Long!')
+    .required('Required Instructor Name'), 
+  });
+  
+  function handleSubmit(values, { setSubmitting,resetForm  }) { 
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+        fetch('http://localhost:8100/instructorList',{
+          method:'POST',
+          mode: "cors", // no-cors, *cors, same-origin 
+          credentials: "same-origin", // include, *same-origin, omit
+          headers:{
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify(values)
+         })
+         console.log(values);
+         resetForm()
+        setSubmitting(false);
+      }, 400);
+     
+  }
+<Formik initialValue={{}} validationSchema={nameofSchema} onSubmit={functionName-handleSubmit}>
+{({ errors, touched }) => ( 
+    <Form>
+        <Field name="instructorName" placeholder="Enter Instructor Name" className="form-control" type="text" />
+           {/* If this field has been touched, and it contains an error, display it */}
+           
+           {touched.instructorName && errors.instructorName && <div>{errors.instructorName}</div>}
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    </Form> 
+  )}
+</Formik>
+```
 
-## Available Scripts
+### Library Install
 
+npm install react-router-dom 
+npm i bootstrap
+npm install formik --save
+npm i yup
+npm install @reduxjs/toolkit react-redux
+
+# Run json server
+
+npx json-server db.json
+npx json-server --watch db.json --port 8500
+
+### Overview: This will be a lecture scheduling module, 
+you have to build an admin panel 
+wherein the admin should have the functionality to add courses and their lectures along with the date of the lectures. 
+The backend code written should make sure that no two schedules set for lectures clash with each other. 
+#### Admin Panel: 
+1. admin can see list of all Instructors (You can add random users) 
+2. admin can add courses Course will have the following details 
+    a. Name 
+    b. Level 
+    c. Description 
+    d. Image 
+    e. Multiple Lectures (batches) -> 
+    can be added after the course is added. as one course can have multiple batches 
+3. These lectures could be assigned to any instructor on any particular date. 
+    Once a lecture is assigned to an instructor on a particular date, 
+    The admin panel shouldn't allow the instructor to be assigned to any other lecture on that date. 
+4. When a course is added the dates will be assigned to the selected instructor 
+5. No other course can be assigned to that instructor with the same date again 
+    (example: if a course's lecture has been assigned to instructor rahul on 1st January, 
+    then the admin should be unable to assign him any other lecture on 1st January. 
+ ### Instructor panel: 
+    This panel should have the list of all lectures assigned to the logged in instructor with dates and course names.
+
+## Available Scripts 
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
+ 
 ### `npm run build`
+ 
+ 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 

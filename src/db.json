@@ -1,0 +1,18 @@
+{
+  "instructorList": [
+    {
+      "id": 1,
+      "instructorName": "Ram Sharma"
+    },
+    {
+      "id": "1f32",
+      "instructorName": "Minal Thakur"
+    },
+    {
+      "id": "e17c",
+      "instructorName": "Sita Raman"
+    }
+  ],
+  "courseList": [],
+  "assignCourse": []
+}
